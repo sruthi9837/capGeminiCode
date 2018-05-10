@@ -1,0 +1,53 @@
+<div class="container">
+  
+      <table class="table table-hover " style='width:65%' id = "my_table">
+          <thead>
+              <tr>
+                  <th class="{{accountHeaderHover}}">Account
+                      <span *ngIf="bottomarrow" (click)="sorting('asc')">
+                      <img src='./assets/images/downarrow.png'>
+                      </span>
+  
+                      <span *ngIf="!bottomarrow" (click)="sorting('desc')">
+                      <img src='./assets/images/uparrow.png'>
+                      </span>
+  
+                  </th>
+                  <th class='{{accountNoHeaderHeaderHover}}'>Available Cash<br>
+                      <span style='font-weight:normal;color:grey'>Todays Cash</span>
+                      <span *ngIf="bottomarrowCash" (click)="sortingCash('asc')">
+                      <img src='./assets/images/downarrow.png'>
+                      </span>
+  
+                      <span *ngIf="!bottomarrowCash" (click)="sortingCash('desc')">
+                      <img src='./assets/images/uparrow.png'>
+                      </span>
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let account of data">
+                  <td class='account' *ngIf='(account.id <= count)'> {{account.Account}}</td>
+                  <td class='availableCash'  *ngIf='(account.id <= count)'>{{account.Available_Cash}}<br>
+                      <span *ngIf="(account.Todays_Change.percent >0)" class='greenClass'>
+                       +{{(account.Todays_Change.percent)}} %
+                       <span> / {{account.Todays_Change.Dollars}}</span>
+                      </span>
+                      <span *ngIf="(account.Todays_Change.percent <0)" class='redClass'>
+                       {{(account.Todays_Change.percent)}} %
+                       <span> / {{account.Todays_Change.Dollars}}</span>
+                      </span>
+  
+                      <span *ngIf="(account.Todays_Change.percent == 0)" class='greyClass'>
+                       {{(account.Todays_Change.percent)}} %
+                       <span> / {{account.Todays_Change.Dollars}}</span>
+                      </span>
+                  </td>
+              </tr>
+              <tr>
+                  <td></td>
+                 <td (click) = "loadMoreRecords()"> <a>Load More</a></td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
